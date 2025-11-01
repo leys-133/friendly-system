@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0e7a47" />
+    <title>رفيق المسلم</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icons/icon-192.png" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <img src="/logo.svg" alt="seven_code7" class="logo" />
+        <div>
+          <h1>رفيق المسلم</h1>
+          <p>استوديو seven_code7 — بإشراف ليث وبالله</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div id="authArea" class="auth-area">
+          <div id="googleBtn" class="g-btn"></div>
+          <div id="userChip" class="user-chip" hidden>
+            <img id="userAvatar" alt="" />
+            <span id="userName"></span>
+            <button id="logoutBtn" title="تسجيل الخروج">⎋</button>
+          </div>
+        </div>
+        <button id="themeToggle" aria-label="تبديل الوضع">🌙</button>
+        <button id="notifyTest" class="secondary">تجربة الإشعار</button>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button data-tab="home" class="active">الصفحة الرئيسية</button>
+      <button data-tab="quran-read">قراءة القرآن</button>
+      <button data-tab="quran-audio">سماع القرآن</button>
+      <button data-tab="hadith">الأحاديث</button>
+      <button data-tab="calendar">التقويم الهجري</button>
+      <button data-tab="tasbih">المسبحة</button>
+      <button data-tab="azkar">الأذكار</button>
+      <button data-tab="assistant">المساعد الذكي</button>
+      <button data-tab="profile">الملف الشخصي</button>
+    </nav>
+
+    <main>
+      <section id="home" class="tab active">
+        <div class="cards">
+          <a class="card" data-go="quran-read">
+            <h3>قراءة القرآن</h3>
+            <p>خط واضح ومريح + متابعة القراءة</p>
+          </a>
+          <a class="card" data-go="quran-audio">
+            <h3>سماع القرآن</h3>
+            <p>اختيار القارئ وتشغيل تلاوة السور</p>
+          </a>
+          <a class="card" data-go="hadith">
+            <h3>الأحاديث الصحيحة</h3>
+            <p>مجموعة مختارة مع التصنيف والبحث</p>
+          </a>
+          <a class="card" data-go="calendar">
+            <h3>التقويم الهجري</h3>
+            <p>التاريخ اليومي + عداد رمضان</p>
+          </a>
+          <a class="card" data-go="tasbih">
+            <h3>المسبحة</h3>
+            <p>مسبحة رقمية تفاعلية وسجل الأذكار</p>
+          </a>
+          <a class="card" data-go="azkar">
+            <h3>الأذكار اليومية</h3>
+            <p>صباح، مساء، بعد الصلاة، النوم...</p>
+          </a>
+          <a class="card" data-go="assistant">
+            <h3>المساعد الذكي</h3>
+            <p>صديق صالح يذكّرك ويُلهمك</p>
+          </a>
+          <a class="card" data-go="profile">
+            <h3>الملف الشخصي</h3>
+            <p>اسمك ونشاطك والنقاط</p>
+          </a>
+        </div>
+      </section>
+
+      <section id="quran-read" class="tab">
+        <header class="section-title"><h2>قراءة القرآن الكريم</h2></header>
+        <div class="quran-read">
+          <div class="toolbar">
+            <label>السورة
+              <select id="surahSelect"></select>
+            </label>
+            <label>حجم الخط
+              <input id="fontSize" type="range" min="18" max="40" value="24" />
+            </label>
+          </div>
+          <article id="quranText" class="mushaf"></article>
+        </div>
+      </section>
+
+      <section id="quran-audio" class="tab">
+        <header class="section-title"><h2>سماع القرآن الكريم</h2></header>
+        <div class="quran-audio">
+          <div class="toolbar">
+            <label>القارئ
+              <select id="reciterSelect"></select>
+            </label>
+            <label>السورة
+              <select id="surahAudioSelect"></select>
+            </label>
+            <button id="playBtn">تشغيل</button>
+          </div>
+          <audio id="player" controls preload="none"></audio>
+          <p class="hint">قد يتطلب التشغيل اتصالاً بالإنترنت وفق مصدر الصوت المختار.</p>
+        </div>
+      </section>
+
+      <section id="hadith" class="tab">
+        <header class="section-title"><h2>الأحاديث النبوية</h2></header>
+        <div class="hadith">
+          <input id="hadithSearch" placeholder="ابحث عن حديث" />
+          <ul id="hadithList" class="list"></ul>
+        </div>
+      </section>
+
+      <section id="calendar" class="tab">
+        <header class="section-title"><h2>التقويم الهجري وعدّاد رمضان</h2></header>
+        <div class="calendar">
+          <div class="today">
+            <div>اليوم (هجري): <span id="hijriToday">—</span></div>
+            <div>اليوم (ميلادي): <span id="gregToday">—</span></div>
+          </div>
+          <div class="countdown">
+            <h3>العد التنازلي لرمضان</h3>
+            <div id="ramadanCountdown" class="counter">—</div>
+          </div>
+          <div class="prayer-times">
+            <h3>أوقات الصلاة (تقديرية)</h3>
+            <button id="locateBtn">تحديد موقعي</button>
+            <ul id="prayerTimes" class="list"></ul>
+            <p class="hint">حسابات دقيقة تتطلب تكامل لاحق مع مكتبة متخصصة (adhan.js).</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="tasbih" class="tab">
+        <header class="section-title"><h2>المسبحة الرقمية</h2></header>
+        <div class="tasbih">
+          <div class="display">
+            <div>الذكر المختار: <span id="dhikrLabel">سبحان الله</span></div>
+            <div>العدد: <span id="count">0</span></div>
+            <div>النقاط: <span id="points">0</span></div>
+          </div>
+          <div class="controls">
+            <select id="dhikrSelect">
+              <option>سبحان الله</option>
+              <option>الحمد لله</option>
+              <option>لا إله إلا الله</option>
+              <option>الله أكبر</option>
+              <option>أستغفر الله</option>
+            </select>
+            <button id="tapBtn" class="primary">سَبِّح</button>
+            <button id="resetBtn" class="secondary">تصفير</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="azkar" class="tab">
+        <header class="section-title"><h2>الأذكار اليومية</h2></header>
+        <div class="azkar">
+          <div class="chips">
+            <button data-cat="morning" class="chip active">أذكار الصباح</button>
+            <button data-cat="evening" class="chip">أذكار المساء</button>
+            <button data-cat="after-prayer" class="chip">بعد الصلاة</button>
+            <button data-cat="sleep" class="chip">النوم</button>
+          </div>
+          <ul id="azkarList" class="list"></ul>
+        </div>
+      </section>
+
+      <section id="assistant" class="tab">
+        <header class="section-title"><h2>المساعد الذكي</h2></header>
+        <div class="assistant grid">
+          <aside class="assistant-side">
+            <div class="side-group">
+              <div class="side-header">المحادثات</div>
+              <div id="chatList" class="chat-list"></div>
+              <button id="newChatBtn" class="primary" style="width:100%">محادثة جديدة</button>
+            </div>
+            <div class="side-group">
+              <div class="side-header">الإعدادات</div>
+              <label class="switch">
+                <input id="remPrayers" type="checkbox" checked />
+                <span>تذكير أوقات الصلاة</span>
+              </label>
+              <label class="switch">
+                <input id="remAzkar" type="checkbox" />
+                <span>تذكير الأذكار</span>
+              </label>
+              <button id="updateLocation" class="secondary" style="margin-top:6px">تحديث الموقع</button>
+              <div class="mini">الموقع: <span id="locLabel">غير معروف</span></div>
+              <div class="mini">الصلاة القادمة: <span id="nextPrayer">—</span></div>
+            </div>
+            <div class="side-group">
+              <div class="side-header">ذاكرة المساعد</div>
+              <textarea id="memoryNotes" rows="6" placeholder="ملاحظات عن تفضيلاتك، أهداف روحانية، حالات مزاجية..."></textarea>
+              <button id="saveMemory" class="secondary">حفظ الذاكرة</button>
+            </div>
+          </aside>
+          <section class="assistant-main">
+            <div class="suggests" id="suggests">
+              <button class="chip" data-suggest="ذكر صباحي قصير">ذكر صباحي قصير</button>
+              <button class="chip" data-suggest="نصيحة لزيادة الخشوع في الصلاة">نصيحة لزيادة الخشوع</button>
+              <button class="chip" data-suggest="حديث اليوم مع شرح موجز">حديث اليوم</button>
+              <button class="chip" data-suggest="دعاء قبل النوم">دعاء قبل النوم</button>
+            </div>
+            <div id="chat" class="chat"></div>
+            <form id="chatForm" class="chat-input" autocomplete="off">
+              <input id="chatText" placeholder="اكتب سؤالك أو ذكرك..." />
+              <button class="primary" type="submit">إرسال</button>
+            </form>
+          </section>
+        </div>
+      </section>
+
+      <section id="profile" class="tab">
+        <header class="section-title"><h2>الملف الشخصي</h2></header>
+        <div class="profile">
+          <label>اسمك
+            <input id="profileName" placeholder="أدخل اسمك" />
+          </label>
+          <button id="saveProfile" class="primary">حفظ</button>
+          <div class="stats">
+            <div>مستوى النشاط: <span id="activityLevel">مبتدئ</span></div>
+            <div>إجمالي النقاط: <span id="totalPoints">0</span></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <span>© جميع الحقوق محفوظة لاستوديو seven_code7 والمطور ليث</span>
+    </footer>
+
+    <button id="fabAssistant" class="fab" title="المساعد">🤝</button>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+  </html>
